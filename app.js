@@ -1,7 +1,6 @@
-// const customEvent = require('./Event');
-
-// customEvent.emit('data');
-// customEvent.emit('info','Rakesh',23);
+//modules import
+const express = require('express');
+const app = express();
 
 //data import
 const products = require('./data/ProductsData');
@@ -9,10 +8,16 @@ const products = require('./data/ProductsData');
 //middlewares import
 const {logger , base} = require('./Middlewares/mid-basic-1')
 
-const express = require('express');
-const app = express();
+//routers import
+const productRouter = require('./routes/basic-router-1');
 
+//builtin middleware use
+app.use(express.urlencoded({extended:false}))
+app.use(express.json());
+
+//custom middleware and routers in use
 app.use(logger);
+app.use('/api/products/',productRouter);
 
 app.get('/',base ,(req,res)=>{
     // res.status(200).json({status:'success',code:200});
@@ -20,19 +25,7 @@ app.get('/',base ,(req,res)=>{
     <a href='/api/products/selective'>Basic Info</a>`)
 })
 
-app.get('/api/products', (req,res)=>{
 
-    res.json(products);
-})
-
-app.get('/api/products/selective', (req,res)=>{
-    const newProducts = products.map(product=>{
-        const {id , name , image} = product;
-        return {id , name , image};
-    })
-
-    res.json(newProducts);
-})
 
 app.listen(5000,()=>{
     console.log("Server is listening on port 5000 ..........");

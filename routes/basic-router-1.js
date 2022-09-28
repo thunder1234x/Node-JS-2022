@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+//data import
+const products = require('../data/ProductsData');
 
 router.get('/selective', (req,res)=>{
     const newProducts = products.map(product=>{

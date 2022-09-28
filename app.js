@@ -2,9 +2,6 @@
 const express = require('express');
 const app = express();
 
-//data import
-const products = require('./data/ProductsData');
-
 //middlewares import
 const {logger , base} = require('./Middlewares/mid-basic-1')
 
@@ -17,7 +14,7 @@ app.use(express.json());
 
 //custom middleware and routers in use
 app.use(logger);
-app.use('/api/products/',productRouter);
+app.use('/api/products',productRouter);
 
 app.get('/',base ,(req,res)=>{
     // res.status(200).json({status:'success',code:200});

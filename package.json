@@ -2,17 +2,19 @@
   "name": "node-js-learning",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./Task Manager Project/app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "nodemon ./Task Manager Project/app.js",
+    "dev": "nodemon ./Task Manager Project/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.2",
     "express": "^4.18.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "mongoose": "^6.6.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

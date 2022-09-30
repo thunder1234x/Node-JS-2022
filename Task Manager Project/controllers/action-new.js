@@ -1,16 +1,18 @@
 const Task = require('../models/model-1');
 const asyncWrapper = require('../middleware/wrapper');
+const {CustomErrorHandler} = require('../errors/customerror');
 
 const getAllTasks = asyncWrapper( async (req,res)=>{
         const tasks = await Task.find({});
         res.status(200).json(tasks);
 })
 
-const getSingleTask = asyncWrapper( async (req,res)=>{
+const getSingleTask = asyncWrapper( async (req,res , next)=>{
         const {id:taskID} = req.params;
         const singleTask = await Task.findOne({_id:taskID});
         if (!singleTask) {
-            return res.status(404).json({type:'error',msg:"No task exists with this ID "})
+            return next(CustomErrorHandler(404 ,`No task found with id ${taskID}`));
+            // return res.status(404).json({type:'error',msg:"No task exists with this ID "})
         }
         res.status(200).json(singleTask);
 })
